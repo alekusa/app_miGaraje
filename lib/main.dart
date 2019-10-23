@@ -133,7 +133,7 @@ class _MyMovieApp extends State<MyMovieApp> {
             Padding(
                 padding: EdgeInsets.only(left: 6.0, top: 2.0),
                 child: Text(
-                  DateFormat("'Vence' M/yyyy")
+                  DateFormat("'Vence:' M/yyyy")
                       .format(DateTime.parse(movieItem.vencimiento)),
                   style: TextStyle(fontSize: 8.0),
                 ))
@@ -182,7 +182,7 @@ class _MyMovieApp extends State<MyMovieApp> {
       appBar: AppBar(
           elevation: 0.0,
           title: Text(
-            'Mi Garaje',
+            'My Garaje',
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 14.0,
