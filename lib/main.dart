@@ -182,7 +182,7 @@ class _MyMovieApp extends State<MyMovieApp> {
       appBar: AppBar(
           elevation: 0.0,
           title: Text(
-            'My Garaje',
+            'My Garaje 1',
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 14.0,
