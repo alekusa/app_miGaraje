@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import './models/anuncioModel.dart';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 
 const baseUrl = 'http://cordobaweb.com/app/detalles.php?ID=';
 
