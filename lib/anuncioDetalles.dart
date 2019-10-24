@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import './models/anuncioModel.dart';
 //import 'package:intl/intl.dart';
 
@@ -18,57 +16,47 @@ class AnuncioDetalles extends StatefulWidget {
 
 class _AnuncioDetalles extends State<AnuncioDetalles> {
   int heroTag = 0;
-  Anuncio detalle;
-  String anuncioDetallesUrl;
-  AnuncioDetalles anuncioDetalles;
+
   @override
   initState() {
     super.initState();
-    anuncioDetallesUrl = '$baseUrl${widget.dat.idAnuncio}';
-    _contruirListaDetalles();
-  }
-
-  void _contruirListaDetalles() async {
-    var response = await http.get(anuncioDetallesUrl);
-    var decodeJson = jsonDecode(response.body);
-    setState(() {
-      detalle = Anuncio.fromJson(decodeJson);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    widget.dat.heroTag = heroTag;
     //heroTag += 1;
-    final moviePoster = Container(
+    final imagen = Container(
         height: 350.0,
         padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
         child: Center(
             child: Card(
                 elevation: 15.0,
                 child: Hero(
-                  tag: widget.dat.heroTag,
+                  tag: heroTag,
                   child: Image.network(
                     "$baseImg${widget.dat.img}",
                     fit: BoxFit.cover,
                   ),
                 ))));
-    final movieTitle = Padding(
+    final titulo = Padding(
       padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
       child: Center(
           child: Text(
-        '${widget.dat.titulo}',
+        widget.dat.titulo,
         style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
         overflow: TextOverflow.ellipsis,
       )),
     );
-    final movieTickets = Row(
+    final costo = Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        detalle == null
+        //Costo del Producto
+        widget.dat.costo == null
             ? CircularProgressIndicator()
             : Text(
-              widget.dat.descripcion,
-              style: TextStyle(fontSize: 11.0),
+                r"$ " "${widget.dat.costo}",
+                style: TextStyle(fontSize: 14.0),
               ),
         Container(
           height: 20.0,
@@ -76,8 +64,10 @@ class _AnuncioDetalles extends State<AnuncioDetalles> {
           color: Colors.white70,
         ),
         Text(
-          "Dirección : ${widget.dat.direccion} ", 
-          style: TextStyle(fontSize: 11.0),
+          //
+          "${widget.dat.porcentajeDescuento}"
+          r" % Descuento",
+          style: TextStyle(fontSize: 15.0),
         ),
         RaisedButton(
           shape: StadiumBorder(),
@@ -88,25 +78,30 @@ class _AnuncioDetalles extends State<AnuncioDetalles> {
         )
       ],
     );
-
-/*    final genresList = Container(
-      height: 25.0,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: movieDetails == null ? [] : movieDetails.genres.map((g) => Padding( 
-          padding: const EdgeInsets.only(right: 6.0),
-          child: FilterChip(
-          backgroundColor: Colors.grey[600],
-          labelStyle: TextStyle(fontSize: 10.0),
-          label: Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Text(g.name),
+    final descripcion = Container(
+      padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 2.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start ,
+        children: <Widget>[
+          Divider(),
+          Text(
+            'Descripcion del Producto',
+            style:
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.grey[300]),
           ),
-          onSelected: (b){},
-        ),
-        )).toList(),
-      ));*/
-
+          SizedBox(
+            height: 10.0,
+          ),
+          Text(
+            widget.dat.descripcion,
+            style: TextStyle(color: Colors.green[300], fontSize: 14.0),
+          ),
+          SizedBox(
+            height: 10.0,
+          )
+        ],
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -119,10 +114,10 @@ class _AnuncioDetalles extends State<AnuncioDetalles> {
       ),
       body: ListView(
         children: <Widget>[
-          moviePoster,
-          movieTitle,
-          movieTickets,
-          
+          imagen,
+          titulo,
+          costo,
+          descripcion,
         ],
       ),
     );
