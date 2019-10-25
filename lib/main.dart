@@ -6,10 +6,9 @@ import './models/anuncioModel.dart';
 import 'package:intl/intl.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'anuncioDetalles.dart';
+import 'package:migaraje/talleresMap.dart';
 
 const baseUrl = 'http://cordobaweb.com/app/';
-//const baseImagesUrl = 'https://image.tmdb.org/t/p/';
-//const apiKey = "3d45a6d3bb11bab74f40da72652554da";
 
 const datosAnuncios = '${baseUrl}datosAnuncio.php?ID=';
 
@@ -35,6 +34,11 @@ class _MyMovieApp extends State<MyMovieApp> {
 
   int heroTag = 0;
   int _currentIndex = 0;
+  void callPage(int index){
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   void initState() {
@@ -242,14 +246,11 @@ class _MyMovieApp extends State<MyMovieApp> {
           ],
         ),
       ),
+      //body: callPage(_currentIndex),
       bottomNavigationBar: BottomNavigationBar(
         fixedColor: Colors.lightBlue,
         currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+        onTap: callPage,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.build),
@@ -266,6 +267,7 @@ class _MyMovieApp extends State<MyMovieApp> {
           BottomNavigationBarItem(
             icon: Icon(Icons.local_car_wash),
             title: Text('Lavaderos'),
+            
           ),
         ],
       ),
