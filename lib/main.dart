@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:migaraje/talleresMap.dart';
 import 'package:migaraje/home.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Mi Garaje',
+      home: MyApp()
+));
 
 class MyApp extends StatefulWidget {
   @override
@@ -20,11 +24,9 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData.dark(),  
       home: Scaffold(
-        // appBar: AppBar(
-        //   title: Text('My Garaje'),
-        // ),
         body: _pageOptions[_selectedPage],
         bottomNavigationBar: BottomNavigationBar(
             fixedColor: Colors.lightBlue,
@@ -36,12 +38,12 @@ class MyAppState extends State<MyApp> {
             },
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.build),
-                title: Text('Talleres'),
+                icon: Icon(Icons.home),
+                title: Text('Ofertas'),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                title: Text('Repuestos'),
+                icon: Icon(Icons.build),
+                title: Text('Talleres'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.opacity),

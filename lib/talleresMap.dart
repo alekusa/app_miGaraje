@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: TalleresMap(),
+      
     );
   }
 }
@@ -115,12 +116,14 @@ class _TalleresMapState extends State<TalleresMap> {
                                 Text(
                                   coffeeShops[index].shopName,
                                   style: TextStyle(
-                                      fontSize: 12.5,
+                                      color: Colors.orange,
+                                      fontSize: 14.5,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
                                   coffeeShops[index].address,
                                   style: TextStyle(
+                                      color: Colors.red,
                                       fontSize: 12.0,
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -129,6 +132,7 @@ class _TalleresMapState extends State<TalleresMap> {
                                   child: Text(
                                     coffeeShops[index].description,
                                     style: TextStyle(
+                                        color: Colors.red,
                                         fontSize: 11.0,
                                         fontWeight: FontWeight.w300),
                                   ),
@@ -143,7 +147,7 @@ class _TalleresMapState extends State<TalleresMap> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Maps'),
+          title: Text('Talleres en Cordoba'),
           centerTitle: true,
         ),
         body: Stack(
@@ -153,7 +157,7 @@ class _TalleresMapState extends State<TalleresMap> {
               width: MediaQuery.of(context).size.width,
               child: GoogleMap(
                 initialCameraPosition: CameraPosition(
-                    target: LatLng(40.7128, -74.0060), zoom: 12.0),
+                    target: LatLng(-31.405154, -64.186780), zoom: 12.0),
                 markers: Set.from(allMarkers),
                 onMapCreated: mapCreated,
               ),
